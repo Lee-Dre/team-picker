@@ -28,7 +28,6 @@
     function assignGroup() {
       const name = document.getElementById("nameInput").value.trim();
       const resultDiv = document.getElementById("result");
-      const summaryDiv = document.getElementById("summary");
 
       if (!name) {
         resultDiv.textContent = "⚠️ 이름을 입력하세요.";
@@ -45,7 +44,11 @@
         resultDiv.textContent = `✅ ${name} 님은 ${group}조입니다!`;
       }
 
-      // 최종 현황 요약
+      updateSummary();
+    }
+
+    function updateSummary() {
+      const summaryDiv = document.getElementById("summary");
       const groupSummary = {};
       for (const [person, group] of Object.entries(assigned)) {
         if (!groupSummary[group]) groupSummary[group] = [];
@@ -64,6 +67,9 @@
 
       summaryDiv.innerHTML = summaryHtml;
     }
+
+    // 페이지 로드 시 초기 현황 표시
+    updateSummary();
   </script>
 </body>
 </html>
